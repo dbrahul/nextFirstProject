@@ -1,10 +1,10 @@
 
 
-export async function  GET(request: Request){
+export async function  GET(request: Request , {params}: any) {
     try {
 
- 
-       const response = await fetch(`https://dummyjson.com/products?limit=${1}`); // fetch 10 products data from dummyjson.com
+      const {slug} = params;
+       const response = await fetch(`https://dummyjson.com/products?limit=${slug}`); // fetch 10 products data from dummyjson.com
       
        if (!response.ok) {
            throw new Error(`Failed to fetch data: ${response.statusText}`);

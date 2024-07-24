@@ -1,67 +1,75 @@
-import { useState } from 'react';
-import {
-  Drawer,
-  List,
-  ListItem,
-  ListItemIcon,
-  ListItemText,
-  IconButton,
-  Collapse,
-} from '@mui/material';
-import {
-  Home as HomeIcon,
-  Settings as SettingsIcon,
-  ExpandLess,
-  ExpandMore,
-} from '@mui/icons-material';
+"use client"
+import * as React from 'react';
+import { styled, useTheme } from '@mui/material/styles';
+import Drawer from '@mui/material/Drawer';
+import List from '@mui/material/List';
+import Divider from '@mui/material/Divider';
+import ListItem from '@mui/material/ListItem';
+import ListItemButton from '@mui/material/ListItemButton';
+import ListItemIcon from '@mui/material/ListItemIcon';
+import ListItemText from '@mui/material/ListItemText';
+import InboxIcon from '@mui/icons-material/MoveToInbox';
+import MailIcon from '@mui/icons-material/Mail';
+import { Typography } from '@mui/material';
+import AnalyticsCollapse from './Analytics';
+import ProjectCollapse from './Project';
+import SettingCollapse from './Settings';
+import PropertyCollapse from './Property';
+import ProblemReportsCollapse from './ProblemReports';
 
-interface SidebarProps {
-    open: boolean;
-    toggleSidebar: () => void;
-    
-}
+const drawerWidth = 240;
 
-const Sidebar = ({ open, toggleSidebar }:SidebarProps) => {
-  const [openSettings, setOpenSettings] = useState(false);
+const DrawerHeader = styled('div')(({ theme }) => ({
+  display: 'flex',
+  alignItems: 'center',
+  padding: theme.spacing(0, 1),
+  // necessary for content to be below app bar
+  ...theme.mixins.toolbar,
+  justifyContent: 'center',
+}));
 
-  const handleSettingsClick = () => {
-    setOpenSettings(!openSettings);
-  };
+export default function Sidebar() {
+  const theme = useTheme();
+  const [open, setOpen] = React.useState(true);
 
-//   const navigateTo = (path: string) => {
-//     router.push(path);
-//     toggleSidebar();
-//   };
+
 
   return (
-    <Drawer variant="persistent" anchor="left" open={open}>
-      <List>
-        <ListItem >
-          <ListItemIcon>
-            <HomeIcon />
-          </ListItemIcon>
-          <ListItemText primary="Home" />
-        </ListItem>
-        <ListItem  onClick={handleSettingsClick}>
-          <ListItemIcon>
-            <SettingsIcon />
-          </ListItemIcon>
-          <ListItemText primary="Settings" />
-          {openSettings ? <ExpandLess /> : <ExpandMore />}
-        </ListItem>
-        <Collapse in={openSettings} timeout="auto" unmountOnExit>
-          <List component="div" disablePadding>
-            <ListItem >
-              <ListItemText inset primary="Profile" />
-            </ListItem>
-            <ListItem >
-              <ListItemText inset primary="Account" />
-            </ListItem>
-          </List>
-        </Collapse>
-      </List>
+    <Drawer
+      sx={{
+        width: drawerWidth,
+        flexShrink: 0,
+        '& .MuiDrawer-paper': {
+          width: drawerWidth,
+          boxSizing: 'border-box',
+          borderRight: 'none'
+        },
+      }}
+      variant="persistent"
+      anchor="left"
+      open={open}
+    >
+      <DrawerHeader >
+        <Typography
+          variant="h4"
+          noWrap
+          component="div"
+          sx={{ display: { xs: 'none', sm: 'block' } }}
+        >
+          LOGO
+        </Typography>
+
+      </DrawerHeader>
+
+        <AnalyticsCollapse/>
+        <Divider />
+        <ProjectCollapse/>
+        <Divider />
+        <PropertyCollapse/>
+        <Divider />
+        <ProblemReportsCollapse/>
+        <Divider />
+        <SettingCollapse/>
     </Drawer>
   );
-};
-
-export default Sidebar;
+}

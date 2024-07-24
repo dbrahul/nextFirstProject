@@ -1,3 +1,5 @@
+"use client"
+
 import * as React from 'react';
 import { styled, alpha } from '@mui/material/styles';
 import AppBar from '@mui/material/AppBar';
@@ -15,6 +17,11 @@ import AccountCircle from '@mui/icons-material/AccountCircle';
 import MailIcon from '@mui/icons-material/Mail';
 import NotificationsIcon from '@mui/icons-material/Notifications';
 import MoreIcon from '@mui/icons-material/MoreVert';
+import { Settings, LogoutSharp, CropFreeSharp } from '@mui/icons-material';
+import Image from 'next/image';
+import NotificationsNoneSharpIcon from '@mui/icons-material/NotificationsNoneSharp';
+import { Avatar } from '@mui/material';
+
 
 const Search = styled('div')(({ theme }) => ({
   position: 'relative',
@@ -25,10 +32,12 @@ const Search = styled('div')(({ theme }) => ({
   },
   marginRight: theme.spacing(2),
   marginLeft: 0,
+  border: '1px solid black',
   width: '100%',
   [theme.breakpoints.up('sm')]: {
     marginLeft: theme.spacing(3),
     width: 'auto',
+
   },
 }));
 
@@ -123,11 +132,28 @@ export default function PrimarySearchAppBar() {
     >
       <MenuItem>
         <IconButton size="large" aria-label="show 4 new mails" color="inherit">
-          <Badge badgeContent={4} color="error">
-            <MailIcon />
+          <Badge sx={{
+            backgroundColor: "#DAE7F9",
+            borderRadius: "10px",
+            padding: "10px"
+          }}>
+            <Image src="./network.svg" alt="Project Icon" width={20} height={20} />
           </Badge>
         </IconButton>
-        <p>Messages</p>
+        <p>Network</p>
+      </MenuItem>
+      <MenuItem>
+        <IconButton size="small" aria-label="show 4 new mails" color="inherit">
+          <Badge sx={{
+            backgroundColor: "#F5F5F5",
+            borderRadius: "10px",
+            padding: "10px",
+            color: "#6290CB"
+          }}>
+            EN
+          </Badge>
+        </IconButton>
+        <p>Language</p>
       </MenuItem>
       <MenuItem>
         <IconButton
@@ -135,13 +161,34 @@ export default function PrimarySearchAppBar() {
           aria-label="show 17 new notifications"
           color="inherit"
         >
-          <Badge badgeContent={17} color="error">
-            <NotificationsIcon />
+          <Badge badgeContent={9} color="info"
+            sx={{
+              backgroundColor: "#DAE7F9",
+              borderRadius: "10px",
+              padding: "10px",
+              color: "#6290CB"
+            }}
+          >
+            <NotificationsNoneSharpIcon />
           </Badge>
         </IconButton>
-        <p>Notifications</p>
+        <p>Notification</p>
+      </MenuItem>
+      <MenuItem>
+        <IconButton size="large" aria-label="show 4 new mails" color="inherit">
+          <Badge color="error" sx={{
+            backgroundColor: "#DAE7F9",
+            borderRadius: "10px",
+            padding: "9px",
+            color: "#6290CB"
+          }}>
+            <LogoutSharp />
+          </Badge>
+        </IconButton>
+        <p>logout</p>
       </MenuItem>
       <MenuItem onClick={handleProfileMenuOpen}>
+
         <IconButton
           size="large"
           aria-label="account of current user"
@@ -149,7 +196,15 @@ export default function PrimarySearchAppBar() {
           aria-haspopup="true"
           color="inherit"
         >
-          <AccountCircle />
+          <Badge sx={{
+            backgroundColor: "#DAE7F9",
+            borderRadius: "10px",
+            padding: "10px",
+            color: "#6290CB"
+          }}>
+
+            <AccountCircle />
+          </Badge>
         </IconButton>
         <p>Profile</p>
       </MenuItem>
@@ -157,26 +212,24 @@ export default function PrimarySearchAppBar() {
   );
 
   return (
-    <Box sx={{ flexGrow: 1 }}>
-      <AppBar position="static">
-        <Toolbar color="white">
+    // <Box sx={{ flexGrow: 1 }}>
+    <>
+      <AppBar position="static" color="inherit">
+        <Toolbar >
           <IconButton
             size="large"
             edge="start"
             color="inherit"
             aria-label="open drawer"
-            sx={{ mr: 2 }}
+            sx={{
+              mr: 1,
+              
+              backgroundColor: "#DAE7F9",
+              borderRadius: "10px"
+            }}
           >
             <MenuIcon />
           </IconButton>
-          <Typography
-            variant="h6"
-            noWrap
-            component="div"
-            sx={{ display: { xs: 'none', sm: 'block' } }}
-          >
-            MUI
-          </Typography>
           <Search>
             <SearchIconWrapper>
               <SearchIcon />
@@ -184,35 +237,86 @@ export default function PrimarySearchAppBar() {
             <StyledInputBase
               placeholder="Search…"
               inputProps={{ 'aria-label': 'search' }}
-            />
+              />
           </Search>
           <Box sx={{ flexGrow: 1 }} />
           <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
             <IconButton size="large" aria-label="show 4 new mails" color="inherit">
-              <Badge badgeContent={4} color="error">
-                <MailIcon />
+              <Badge sx={{
+                backgroundColor: "#DAE7F9",
+                borderRadius: "10px",
+                padding: "10px"
+              }}>
+                <Image src="./network.svg" alt="Project Icon" width={20} height={20} />
               </Badge>
             </IconButton>
+            {/* icons for language  */}
+            <IconButton size="small" aria-label="show 4 new mails" color="inherit">
+              <Badge sx={{
+                backgroundColor: "#F5F5F5",
+                borderRadius: "10px",
+                padding: "9px",
+                color: "#6290CB"
+              }}>
+                EN
+              </Badge>
+            </IconButton>
+            {/* icons for notifications */}
             <IconButton
               size="large"
               aria-label="show 17 new notifications"
               color="inherit"
-            >
-              <Badge badgeContent={17} color="error">
-                <NotificationsIcon />
+              >
+              <Badge badgeContent={9} color="info"
+                sx={{
+                  backgroundColor: "#DAE7F9",
+                  borderRadius: "10px",
+                  padding: "10px",
+                  color: "#6290CB"
+                }}
+              >
+                <NotificationsNoneSharpIcon />
               </Badge>
             </IconButton>
-            <IconButton
-              size="large"
-              edge="end"
-              aria-label="account of current user"
-              aria-controls={menuId}
-              aria-haspopup="true"
-              onClick={handleProfileMenuOpen}
-              color="inherit"
-            >
-              <AccountCircle />
+
+            {/* icon for logout  */}
+            <IconButton size="large" aria-label="show 4 new mails" color="inherit">
+              <Badge color="error" sx={{
+                backgroundColor: "#DAE7F9",
+                borderRadius: "10px",
+                padding: "9px",
+                color: "#6290CB"
+              }}>
+                <LogoutSharp />
+              </Badge>
             </IconButton>
+            {/* icon for Zoom  */}
+            <IconButton size="large" aria-label="show 4 new mails" color="inherit">
+              <Badge color="error" sx={{
+                backgroundColor: "#DAE7F9",
+                borderRadius: "10px",
+                padding: "9px",
+                color: "#6290CB"
+                
+              }}>
+                <CropFreeSharp />
+              </Badge>
+            </IconButton>
+            <Box sx={{ display: 'flex', alignItems: 'center', backgroundColor: '#f5f5f5', borderRadius: '50px', padding: '3px 13px 3px 7px', margin: "9px 0px" }}>
+              <Avatar sx={{ bgcolor: '#d0e2ff', color: '#1976d2' }}>S</Avatar>
+
+              <IconButton edge="end" color="inherit">
+                <Badge sx={{
+                  
+                  color: "#6290CB"
+                  
+                }}>
+
+
+                  <Settings />
+                </Badge>
+              </IconButton>
+            </Box>
           </Box>
           <Box sx={{ display: { xs: 'flex', md: 'none' } }}>
             <IconButton
@@ -222,7 +326,7 @@ export default function PrimarySearchAppBar() {
               aria-haspopup="true"
               onClick={handleMobileMenuOpen}
               color="inherit"
-            >
+              >
               <MoreIcon />
             </IconButton>
           </Box>
@@ -230,6 +334,7 @@ export default function PrimarySearchAppBar() {
       </AppBar>
       {renderMobileMenu}
       {renderMenu}
-    </Box>
+      </>
+    // </Box>
   );
 }

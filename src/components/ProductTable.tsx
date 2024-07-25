@@ -7,7 +7,7 @@ import {
     getCoreRowModel,
     useReactTable,
 } from '@tanstack/react-table'
-import { useReducer, useState } from 'react'
+import { useState } from 'react'
 import styled from 'styled-components'
 
 type Person = {

@@ -19,7 +19,7 @@ export async function GET(request: Request, { params }: any) {
     return Response.json({
       message: "Data fetched successfully",
       success: true,
-      data: data.products,
+      data: data,
     }, {
       status: 200
     });

@@ -3,9 +3,20 @@ import Navbar from "../components/navbar/Navbar"; // Importing Navbar component.
 import Sidebar from "@/components/sidebar/Sidebar"; // Importing Sidebar component.
 import ProductTable from "@/components/ProductTable"; // Importing ProductTable component.
 
-export default function Home() {
+
+
+async function fetchProducts() {
+  const res = await fetch('http://localhost:3000/api/products');
+  const data = await res.json();
+  return data.data;
+
+}
+
+
+export default async function Home() {
+  const data = await fetchProducts();
   return (
-    <Box sx={{ display: 'flex', width: '100%' }}>
+    <Box sx={{ display: 'flex', width: '100%'  }}>
       <Sidebar /> {/* Sidebar component */}
       <Box component="main" sx={{ flexGrow: 1, width: { sm: `calc(100% - ${240}px)` } }}>
         <Navbar /> {/* Navbar component */}
@@ -16,7 +27,7 @@ export default function Home() {
             </Box>
             <Divider /> {/* Divider line */}
             <Box padding={1}>
-              <ProductTable /> {/* ProductTable component */}
+              <ProductTable data={data}  /> {/* ProductTable component */}
             </Box>
           </Box>
         </Box>
@@ -24,3 +35,9 @@ export default function Home() {
     </Box>
   );
 }
+
+
+
+
+
+

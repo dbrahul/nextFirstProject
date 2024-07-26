@@ -3,7 +3,7 @@
 export async function GET(request: Request) {
   try {
     // Make a fetch request to the dummy JSON API to get 10 products
-    const response = await fetch("https://dummyjson.com/products?limit=10");
+    const response = await fetch("https://dummyjson.com/products?limit=6");
 
     // Check if the response is not OK (status code outside the range 200-299)
     if (!response.ok) {

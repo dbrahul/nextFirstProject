@@ -6,7 +6,6 @@ import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
 import IconButton from '@mui/material/IconButton';
-import Typography from '@mui/material/Typography';
 import InputBase from '@mui/material/InputBase';
 import Badge from '@mui/material/Badge';
 import MenuItem from '@mui/material/MenuItem';
@@ -14,15 +13,13 @@ import Menu from '@mui/material/Menu';
 import MenuIcon from '@mui/icons-material/Menu';
 import SearchIcon from '@mui/icons-material/Search';
 import AccountCircle from '@mui/icons-material/AccountCircle';
-import MailIcon from '@mui/icons-material/Mail';
-import NotificationsIcon from '@mui/icons-material/Notifications';
 import MoreIcon from '@mui/icons-material/MoreVert';
 import { Settings, LogoutSharp, CropFreeSharp } from '@mui/icons-material';
 import Image from 'next/image';
 import NotificationsNoneSharpIcon from '@mui/icons-material/NotificationsNoneSharp';
 import { Avatar } from '@mui/material';
 
-
+// Custom styled components for the search bar
 const Search = styled('div')(({ theme }) => ({
   position: 'relative',
   borderRadius: theme.shape.borderRadius,
@@ -37,7 +34,6 @@ const Search = styled('div')(({ theme }) => ({
   [theme.breakpoints.up('sm')]: {
     marginLeft: theme.spacing(3),
     width: 'auto',
-
   },
 }));
 
@@ -66,14 +62,15 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 }));
 
 export default function PrimarySearchAppBar() {
-
+  // State for controlling the profile and mobile menu anchors
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
-  const [mobileMoreAnchorEl, setMobileMoreAnchorEl] =
-    React.useState<null | HTMLElement>(null);
+  const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState<null | HTMLElement>(null);
 
+  // Boolean values to check if menus are open
   const isMenuOpen = Boolean(anchorEl);
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
 
+  // Handlers for menu interactions
   const handleProfileMenuOpen = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorEl(event.currentTarget);
   };
@@ -137,7 +134,7 @@ export default function PrimarySearchAppBar() {
             borderRadius: "10px",
             padding: "10px"
           }}>
-            <Image src="./network.svg" alt="Project Icon" width={20} height={20} />
+            <Image src="/network.svg" alt="Network Icon" width={20} height={20} />
           </Badge>
         </IconButton>
         <p>Network</p>
@@ -156,27 +153,21 @@ export default function PrimarySearchAppBar() {
         <p>Language</p>
       </MenuItem>
       <MenuItem>
-        <IconButton
-          size="large"
-          aria-label="show 17 new notifications"
-          color="inherit"
-        >
-          <Badge badgeContent={9} color="info"
-            sx={{
-              backgroundColor: "#DAE7F9",
-              borderRadius: "10px",
-              padding: "10px",
-              color: "#6290CB"
-            }}
-          >
+        <IconButton size="large" aria-label="show 17 new notifications" color="inherit">
+          <Badge badgeContent={9} color="info" sx={{
+            backgroundColor: "#DAE7F9",
+            borderRadius: "10px",
+            padding: "10px",
+            color: "#6290CB"
+          }}>
             <NotificationsNoneSharpIcon />
           </Badge>
         </IconButton>
         <p>Notification</p>
       </MenuItem>
       <MenuItem>
-        <IconButton size="large" aria-label="show 4 new mails" color="inherit">
-          <Badge color="error" sx={{
+        <IconButton size="large" aria-label="logout" color="inherit">
+          <Badge sx={{
             backgroundColor: "#DAE7F9",
             borderRadius: "10px",
             padding: "9px",
@@ -185,10 +176,9 @@ export default function PrimarySearchAppBar() {
             <LogoutSharp />
           </Badge>
         </IconButton>
-        <p>logout</p>
+        <p>Logout</p>
       </MenuItem>
       <MenuItem onClick={handleProfileMenuOpen}>
-
         <IconButton
           size="large"
           aria-label="account of current user"
@@ -202,7 +192,6 @@ export default function PrimarySearchAppBar() {
             padding: "10px",
             color: "#6290CB"
           }}>
-
             <AccountCircle />
           </Badge>
         </IconButton>
@@ -212,10 +201,10 @@ export default function PrimarySearchAppBar() {
   );
 
   return (
-    // <Box sx={{ flexGrow: 1 }}>
     <>
       <AppBar position="static" color="inherit">
-        <Toolbar >
+        <Toolbar>
+          {/* Menu icon button */}
           <IconButton
             size="large"
             edge="start"
@@ -223,13 +212,13 @@ export default function PrimarySearchAppBar() {
             aria-label="open drawer"
             sx={{
               mr: 1,
-              
               backgroundColor: "#DAE7F9",
               borderRadius: "10px"
             }}
           >
             <MenuIcon />
           </IconButton>
+          {/* Search bar */}
           <Search>
             <SearchIconWrapper>
               <SearchIcon />
@@ -237,21 +226,23 @@ export default function PrimarySearchAppBar() {
             <StyledInputBase
               placeholder="Search…"
               inputProps={{ 'aria-label': 'search' }}
-              />
+            />
           </Search>
           <Box sx={{ flexGrow: 1 }} />
+          {/* Desktop menu */}
           <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
-            <IconButton size="large" aria-label="show 4 new mails" color="inherit">
+            {/* Network icon */}
+            <IconButton size="large" aria-label="network" color="inherit">
               <Badge sx={{
                 backgroundColor: "#DAE7F9",
                 borderRadius: "10px",
                 padding: "10px"
               }}>
-                <Image src="./network.svg" alt="Project Icon" width={20} height={20} />
+                <Image src="/network.svg" alt="Network Icon" width={20} height={20} />
               </Badge>
             </IconButton>
-            {/* icons for language  */}
-            <IconButton size="small" aria-label="show 4 new mails" color="inherit">
+            {/* Language icon */}
+            <IconButton size="small" aria-label="language" color="inherit">
               <Badge sx={{
                 backgroundColor: "#F5F5F5",
                 borderRadius: "10px",
@@ -261,27 +252,20 @@ export default function PrimarySearchAppBar() {
                 EN
               </Badge>
             </IconButton>
-            {/* icons for notifications */}
-            <IconButton
-              size="large"
-              aria-label="show 17 new notifications"
-              color="inherit"
-              >
-              <Badge badgeContent={9} color="info"
-                sx={{
-                  backgroundColor: "#DAE7F9",
-                  borderRadius: "10px",
-                  padding: "10px",
-                  color: "#6290CB"
-                }}
-              >
+            {/* Notification icon */}
+            <IconButton size="large" aria-label="notifications" color="inherit">
+              <Badge badgeContent={9} color="info" sx={{
+                backgroundColor: "#DAE7F9",
+                borderRadius: "10px",
+                padding: "10px",
+                color: "#6290CB"
+              }}>
                 <NotificationsNoneSharpIcon />
               </Badge>
             </IconButton>
-
-            {/* icon for logout  */}
-            <IconButton size="large" aria-label="show 4 new mails" color="inherit">
-              <Badge color="error" sx={{
+            {/* Logout icon */}
+            <IconButton size="large" aria-label="logout" color="inherit">
+              <Badge sx={{
                 backgroundColor: "#DAE7F9",
                 borderRadius: "10px",
                 padding: "9px",
@@ -290,34 +274,30 @@ export default function PrimarySearchAppBar() {
                 <LogoutSharp />
               </Badge>
             </IconButton>
-            {/* icon for Zoom  */}
-            <IconButton size="large" aria-label="show 4 new mails" color="inherit">
-              <Badge color="error" sx={{
+            {/* Zoom icon */}
+            <IconButton size="large" aria-label="zoom" color="inherit">
+              <Badge sx={{
                 backgroundColor: "#DAE7F9",
                 borderRadius: "10px",
                 padding: "9px",
                 color: "#6290CB"
-                
               }}>
                 <CropFreeSharp />
               </Badge>
             </IconButton>
+            {/* Profile and settings */}
             <Box sx={{ display: 'flex', alignItems: 'center', backgroundColor: '#f5f5f5', borderRadius: '50px', padding: '3px 13px 3px 7px', margin: "9px 0px" }}>
               <Avatar sx={{ bgcolor: '#d0e2ff', color: '#1976d2' }}>S</Avatar>
-
               <IconButton edge="end" color="inherit">
                 <Badge sx={{
-                  
                   color: "#6290CB"
-                  
                 }}>
-
-
                   <Settings />
                 </Badge>
               </IconButton>
             </Box>
           </Box>
+          {/* Mobile menu */}
           <Box sx={{ display: { xs: 'flex', md: 'none' } }}>
             <IconButton
               size="large"
@@ -326,7 +306,7 @@ export default function PrimarySearchAppBar() {
               aria-haspopup="true"
               onClick={handleMobileMenuOpen}
               color="inherit"
-              >
+            >
               <MoreIcon />
             </IconButton>
           </Box>
@@ -334,7 +314,6 @@ export default function PrimarySearchAppBar() {
       </AppBar>
       {renderMobileMenu}
       {renderMenu}
-      </>
-    // </Box>
+    </>
   );
 }

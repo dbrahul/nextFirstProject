@@ -10,21 +10,19 @@ import SettingCollapse from './Settings';
 import PropertyCollapse from './Property';
 import ProblemReportsCollapse from './ProblemReports';
 
-const drawerWidth = 240;
+const drawerWidth = 240; // Width of the sidebar drawer
 
+// DrawerHeader styled component to align items and ensure content is below the app bar
 const DrawerHeader = styled('div')(({ theme }) => ({
   display: 'flex',
   alignItems: 'center',
   padding: theme.spacing(0, 1),
-  // necessary for content to be below app bar
   ...theme.mixins.toolbar,
   justifyContent: 'center',
 }));
 
-export default function Sidebar() { 
-  const [open, setOpen] = React.useState(true);
-
-
+export default function Sidebar() {
+  const [open, setOpen] = React.useState(true); // State to control drawer open/close
 
   return (
     <Drawer
@@ -34,14 +32,14 @@ export default function Sidebar() {
         '& .MuiDrawer-paper': {
           width: drawerWidth,
           boxSizing: 'border-box',
-          borderRight: 'none'
+          borderRight: 'none',
         },
       }}
-      variant="persistent"
-      anchor="left"
-      open={open}
+      variant="persistent" // Persistent drawer type
+      anchor="left" // Drawer anchored to the left
+      open={open} // Control the open state
     >
-      <DrawerHeader >
+      <DrawerHeader>
         <Typography
           variant="h4"
           noWrap
@@ -50,18 +48,16 @@ export default function Sidebar() {
         >
           LOGO
         </Typography>
-
       </DrawerHeader>
-
-        <AnalyticsCollapse/>
-        <Divider />
-        <ProjectCollapse/>
-        <Divider />
-        <PropertyCollapse/>
-        <Divider />
-        <ProblemReportsCollapse/>
-        <Divider />
-        <SettingCollapse/>
+      <AnalyticsCollapse />
+      <Divider />
+      <ProjectCollapse />
+      <Divider />
+      <PropertyCollapse />
+      <Divider />
+      <ProblemReportsCollapse />
+      <Divider />
+      <SettingCollapse />
     </Drawer>
   );
 }

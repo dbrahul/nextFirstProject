@@ -1,37 +1,38 @@
 "use client"
-
-import { ExpandLess, ExpandMore, StarBorder } from '@mui/icons-material'
-import { Collapse, List, ListItemButton, ListItemIcon, ListItemText } from '@mui/material'
-import Image from 'next/image'
-import React, { useState } from 'react'
+import { ExpandLess, ExpandMore } from '@mui/icons-material';
+import { Collapse, List, ListItemButton, ListItemIcon, ListItemText } from '@mui/material';
+import Image from 'next/image';
+import React, { useState } from 'react';
 
 const ProblemReportsCollapse = () => {
-    const [open, setOpen] = useState(false)
+  const [open, setOpen] = useState(false); // State to control collapse open/close
+
   return (
     <List>
+      {/* ListItemButton to toggle collapse */}
+      <ListItemButton onClick={() => setOpen(!open)}>
+        <ListItemIcon>
+          {/* Using next/image for optimized image rendering */}
+          <Image src="/problem.svg" alt="Problem Icon" width={23} height={23} />
+        </ListItemIcon>
+        <ListItemText primary="Problem Reports" />
+        {/* Conditional rendering of expand/collapse icons */}
+        {open ? <ExpandLess /> : <ExpandMore />}
+      </ListItemButton>
 
+      {/* Collapsible list items */}
+      <Collapse in={open} timeout="auto" unmountOnExit>
+        <List component="div" disablePadding>
+          <ListItemButton sx={{ pl: 4 }}>
+            <ListItemIcon>
+              <Image src="/problem.svg" alt="Problem Icon" width={23} height={23} />
+            </ListItemIcon>
+            <ListItemText primary="Problem Reports" />
+          </ListItemButton>
+        </List>
+      </Collapse>
+    </List>
+  );
+};
 
-    <ListItemButton
-      onClick={()=> setOpen(!open)}
-    >
-      <ListItemIcon>
-      <Image src="./problem.svg" alt="Project Icon" width={23} height={23} />
-      </ListItemIcon>
-      <ListItemText primary="Problem reports" />
-      {open ? <ExpandLess /> : <ExpandMore />}
-    </ListItemButton>
-    <Collapse in={open} timeout="auto" unmountOnExit>
-      <List component="div" disablePadding>
-        <ListItemButton sx={{ pl: 4 }}>
-          <ListItemIcon>
-          <Image src="./problem.svg" alt="Project Icon" width={23} height={23} />
-          </ListItemIcon>
-          <ListItemText primary="Problem reports" />
-        </ListItemButton>
-      </List>
-    </Collapse>
-  </List>
-  )
-}
-
-export default ProblemReportsCollapse
+export default ProblemReportsCollapse;

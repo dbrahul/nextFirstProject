@@ -1,8 +1,8 @@
-
 import React from 'react';
-import { Modal, Box, Typography, Button, List, ListItem, ListItemText, Divider } from '@mui/material';
+import { Modal, Box, Typography, List, ListItem, ListItemText, Divider } from '@mui/material';
 import { Review, ReviewModalProps } from '@/types/types';
 
+// Styles for the modal
 const style = {
     position: 'absolute',
     top: '50%',
@@ -15,17 +15,17 @@ const style = {
     borderRadius: 2,
 };
 
-
+// Fetch product data by ID
 async function fetchProduct(id: number) {
     const res = await fetch(`http://localhost:3000/api/products/${id}`);
     const data = await res.json();
     return data.data;
 }
 
-
+// ReviewModal component to display product reviews
 async function ReviewModal({ open, handleClose, id }: ReviewModalProps) {
-
-    const data = await fetchProduct(id)
+    // Fetch product data
+    const data = await fetchProduct(id);
 
     return (
         <Modal
@@ -39,7 +39,8 @@ async function ReviewModal({ open, handleClose, id }: ReviewModalProps) {
                     Reviews
                 </Typography>
                 <List>
-                    {data?.reviews?.map((review: Review, index:number) => (
+                    {/* Map through the reviews and display each one */}
+                    {data?.reviews?.map((review: Review, index: number) => (
                         <div key={index}>
                             <ListItem alignItems="flex-start">
                                 <ListItemText
@@ -57,6 +58,7 @@ async function ReviewModal({ open, handleClose, id }: ReviewModalProps) {
                                     }
                                 />
                             </ListItem>
+                            {/* Add a divider between reviews */}
                             {index < data?.reviews?.length - 1 && <Divider />}
                         </div>
                     ))}

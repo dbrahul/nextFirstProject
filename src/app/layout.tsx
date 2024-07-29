@@ -4,7 +4,7 @@ import type { Metadata } from "next"; // Importing the type definition for Metad
 import { Inter } from "next/font/google"; // Importing the Inter font from Google Fonts using Next.js.
 import "./globals.css"; // Importing global CSS styles.
 import StyledComponentsRegistry from "../lib/registry"; // Importing the Styled Components registry for managing styles.
-import { useState } from "react"; // Importing the useState hook from React for state management.
+import { useEffect, useState } from "react"; // Importing the useState hook from React for state management.
 
 // Initializing the Inter font with the Latin subset.
 const inter = Inter({ subsets: ["latin"] });
@@ -21,13 +21,6 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  // useState hook to manage the state of the sidebar (open/closed).
-  const [sidebarOpen, setSidebarOpen] = useState(false);
-  
-  // Function to toggle the sidebar state.
-  const toggleSidebar = () => {
-    setSidebarOpen(!sidebarOpen);
-  };
   
   // Returning the HTML structure of the layout.
   return (

@@ -5,3 +5,17 @@ body{
     background-color: #f5f5f5;
     color: #333;
 }
+
+.active{
+    background-color: #DAE7F9 !important;
+    border-radius: 8px;
+}
+
+.override-defaultLink{
+    text-decoration: none;
+    color: unset;
+}
+
+.navLik:hover {
+    background-color: #8ebfff !important;
+}

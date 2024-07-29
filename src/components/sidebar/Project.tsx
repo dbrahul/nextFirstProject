@@ -4,10 +4,13 @@ import { ExpandLess, ExpandMore } from '@mui/icons-material';
 import { Collapse, List, ListItemButton, ListItemIcon, ListItemText } from '@mui/material';
 import Image from 'next/image';
 import React, { useState } from 'react';
+import Link from 'next/link'
+import { usePathname } from 'next/navigation';
+
 
 const ProjectCollapse = () => {
   const [open, setOpen] = useState(true); // State to control collapse open/close
-
+  const pathname = usePathname()
   return (
     <List>
       {/* ListItemButton to toggle collapse */}
@@ -25,6 +28,7 @@ const ProjectCollapse = () => {
       <Collapse in={open} timeout="auto" unmountOnExit>
         <List component="div" disablePadding>
           {/* Add Projects button */}
+
           <ListItemButton sx={{ pl: 4 }}>
             <ListItemIcon>
               <Image src="/AddProject.svg" alt="Add Projects Icon" width={24} height={24} />
@@ -33,12 +37,14 @@ const ProjectCollapse = () => {
           </ListItemButton>
 
           {/* Project Table button */}
-          <ListItemButton sx={{ pl: 4 }}>
-            <ListItemIcon>
-              <Image src="/Project.svg" alt="Project Table Icon" width={24} height={24} />
-            </ListItemIcon>
-            <ListItemText primary="Project Table" />
-          </ListItemButton>
+          <Link href={"/project"} className={`override-defaultLink`}>
+            <ListItemButton sx={{ pl: 4 }} className={`navLik ${pathname === "/project" ? "active" : ""}`}>
+              <ListItemIcon>
+                <Image src="/Project.svg" alt="Project Table Icon" width={24} height={24} />
+              </ListItemIcon>
+              <ListItemText primary="Project Table" />
+            </ListItemButton>
+          </Link>
 
           {/* Deleted Projects button */}
           <ListItemButton sx={{ pl: 4 }}>

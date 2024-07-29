@@ -4,34 +4,37 @@ import Sidebar from "@/components/sidebar/Sidebar"; // Importing Sidebar compone
 import ProductTable from "@/components/ProductTable"; // Importing ProductTable component.
 import BreadcrumbsNavigation from "@/components/navbar/NavigationBreadCrumb";
 
-// Function to fetch the product from the server
+
+
 async function fetchProducts() {
-  const apiUrl = typeof window === 'undefined' ? process.env.NEXT_PUBLIC_API_URL : '';
-  const res = await fetch(`${apiUrl}/api/products`);
-  if (!res.ok) {
-    throw new Error("Failed to fetch product data");
-  }
+  const res = await fetch('https://dummyjson.com/products?limit=6');
   const data = await res.json();
-  return data.data;
+  return data.products;
+
 }
 
-export default async function Dashboard() {
-  const data = await fetchProducts();  // invoking the fetchProducts function
 
+export default async function Dashboard() {
+
+  const data = await fetchProducts();
+  
   return (
-    <Box sx={{ display: 'flex', width: '100%' }}>
+    <Box sx={{ display: 'flex', width: '100%'  }}>
       <Sidebar /> {/* Sidebar component */}
       <Box component="main" sx={{ flexGrow: 1, width: { sm: `calc(100% - ${240}px)` } }}>
         <Navbar /> {/* Navbar component */}
+       
         <Box component="main" bgcolor={"#EEF2F6"} sx={{ flexGrow: 1, p: 2 }}>
-          <BreadcrumbsNavigation />
+         <BreadcrumbsNavigation/>
           <Box sx={{ bgcolor: "white", borderRadius: "12px" }}>
             <Box padding={1}>
-              <Typography sx={{ paddingLeft: 1 }}>Projects</Typography> {/* Projects title */}
+              <Typography sx={{
+                paddingLeft:1
+              }}>Projects</Typography> {/* Projects title */}
             </Box>
             <Divider /> {/* Divider line */}
             <Box padding={2}>
-              <ProductTable data={data} /> {/* ProductTable component */}
+              <ProductTable data={data}  /> {/* ProductTable component */}
             </Box>
           </Box>
         </Box>

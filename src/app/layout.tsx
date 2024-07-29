@@ -4,7 +4,7 @@ import type { Metadata } from "next"; // Importing the type definition for Metad
 import { Inter } from "next/font/google"; // Importing the Inter font from Google Fonts using Next.js.
 import "./globals.css"; // Importing global CSS styles.
 import StyledComponentsRegistry from "../lib/registry"; // Importing the Styled Components registry for managing styles.
-import { useEffect, useState } from "react"; // Importing the useState hook from React for state management.
+
 
 // Initializing the Inter font with the Latin subset.
 const inter = Inter({ subsets: ["latin"] });

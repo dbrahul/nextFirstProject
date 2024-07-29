@@ -8,7 +8,8 @@ import BreadcrumbsNavigation from "@/components/navbar/NavigationBreadCrumb";
 
 // function to fetch the product from the server
 async function fetchProducts() {
-  const res = await fetch('http://localhost:3000/api/products');
+  const apiUrl = process.env.NEXT_PUBLIC_API_URL;
+  const res = await fetch(`${apiUrl}/api/products`);
   const data = await res.json();
   return data.data;
 

@@ -17,7 +17,8 @@ const style = {
 
 // Fetch product data by ID
 async function fetchProduct(id: number) {
-    const res = await fetch(`http://localhost:3000/api/products/${id}`);
+    const apiUrl = process.env.NEXT_PUBLIC_API_URL;
+    const res = await fetch(`${apiUrl}/api/products/${id}`);
     const data = await res.json();
     return data.data;
 }
